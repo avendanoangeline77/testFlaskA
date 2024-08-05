@@ -26,7 +26,7 @@ def test_register(client, app):
     (
         ("", "", "Usuario requerido."),
         ("a", "", "Contraseña requerida."),
-        ("test", "test", "Usuario {username} esta registrado."),
+        ("test", "test", "ya esta registrado."),
     ),
 )
 def test_register_validate_input(client, username, password, message):
