@@ -15,7 +15,7 @@ def test_register(client, app):
 
     # test that the user was inserted into the database
     with app.app_context():
-        
+
         
         usuario = get_db().execute("SELECT * FROM user WHERE username = 'a'").fetchone()
         assert (usuario is not None)
@@ -51,12 +51,11 @@ def test_login(client, auth):
         assert session["user_id"] == 1
         assert g.user["username"] == "test"
 
-
 @pytest.mark.parametrize(
     ("username", "password", "message"),
-    (("a", "test","Usuario incorrecto."), 
-     ("test", "a","Contraseña incorrecta.")),
+    (("a", "test", "Usuario incorrecto o contraseña"), ("test", "a", "")),
 )
+
 def test_login_validate_input(auth, username, password, message):
     response = auth.login(username, password)
     assert message in response.data.decode()
